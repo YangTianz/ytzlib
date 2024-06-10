@@ -57,7 +57,7 @@ def test_search_by_regex_1():
     assert len(ret) == 12
 
 
-def test_search_by_regex_1():
+def test_search_by_regex_2():
     ret = search_by_regex(
         ["tests/test_directory_tree"],
         ["[a-z]*[2]+"],
@@ -65,7 +65,7 @@ def test_search_by_regex_1():
     assert len(ret) == 5
 
 
-def test_search_by_regex_2():
+def test_search_by_regex_3():
     ret = search_by_regex(
         ["tests/test_directory_tree"],
         ["[a-z]*[12]\.py"],
@@ -73,7 +73,7 @@ def test_search_by_regex_2():
     assert len(ret) == 2
 
 
-def test_search_by_regex_2():
+def test_search_by_regex_4():
     ret = search_by_regex(
         ["tests/test_directory_tree"],
         ["[a-z]*[2]-[01]+\.py"],
