@@ -1,0 +1,60 @@
+[project]
+name = "ytzlib"
+version = "0.1.0"
+dependencies = []
+requires-python = ">= 3.11"
+authors = [
+    {name = "Yang Tianzhe", email = "tingerytz@gmail.com"},
+]
+description = "Tianzhe's common scripts"
+readme = "README.md"
+
+[project.scripts]
+hello-world = "ytzlib.sync:main"
+
+# [project.gui-scripts]
+# spam-gui = "spam:main_gui"
+
+[tool.ruff]
+exclude = [
+    ".venv",
+    ".git",
+    "__pycache__",
+    ".mypy_cache",
+]
+line-length = 80
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+ignore = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+
+
+[tool.mypy]
+python_version = "3.11"
+exclude = ["tests"]
+
+[[tool.mypy.overrides]]
+module = "ytzlib.path_helper"
+disallow_untyped_defs = false
+ignore_missing_imports = false
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
