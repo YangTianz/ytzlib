@@ -12,8 +12,6 @@ readme = "README.md"
 [project.scripts]
 hello-world = "ytzlib.sync:main"
 
-# [project.gui-scripts]
-# spam-gui = "spam:main_gui"
 
 [tool.ruff]
 exclude = [
@@ -26,9 +24,13 @@ line-length = 80
 indent-width = 4
 target-version = "py311"
 
+
 [tool.ruff.lint]
 ignore = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.isort]
+force-single-line = true
 
 [tool.ruff.format]
 quote-style = "double"
