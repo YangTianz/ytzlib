@@ -49,6 +49,6 @@ def search_by_regex(
                             ret.append(os.path.join(path, file_name))
         else:
             for pattern in patterns:
-                if pattern.match(input_paths) is not None:
+                if pattern.match(input_path) is not None:
                     ret.append(input_path)
     return ret
