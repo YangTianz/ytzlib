@@ -1,4 +1,5 @@
 import asyncio
+import inspect
 import time
 from typing import Callable
 
@@ -38,7 +39,10 @@ class TickHelper:
 
         async def handle():
             if timer_id in self._callbacks:
-                self._callbacks[timer_id]()
+                if inspect.iscoroutinefunction(self._callbacks[timer_id]):
+                    await self._callbacks[timer_id]()
+                else:
+                    self._callbacks[timer_id]()
                 await asyncio.sleep(self._intervals[timer_id])
                 asyncio.create_task(handle())
 
@@ -69,7 +73,8 @@ async def main():
     def hello2():
         print("hello2", _get_time())
 
-    def hello5():
+    async def hello5():
+        await asyncio.sleep(1)
         print("hello5", _get_time())
 
     _ = ticker.repeat_call(hello1, 1)
