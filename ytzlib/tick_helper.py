@@ -1,6 +1,7 @@
 import asyncio
 import inspect
 import time
+import traceback
 from typing import Callable
 
 
@@ -26,7 +27,10 @@ class TickHelper:
     def delay_call(self, callback: Callable[..., None], delay: float) -> None:
         async def call_later():
             await asyncio.sleep(delay)
-            callback()
+            try:
+                callback()
+            except Exception:
+                traceback.print_exc()
 
         asyncio.create_task(call_later())
 
@@ -39,10 +43,13 @@ class TickHelper:
 
         async def handle():
             if timer_id in self._callbacks:
-                if inspect.iscoroutinefunction(self._callbacks[timer_id]):
-                    await self._callbacks[timer_id]()
-                else:
-                    self._callbacks[timer_id]()
+                try:
+                    if inspect.iscoroutinefunction(self._callbacks[timer_id]):
+                        await self._callbacks[timer_id]()
+                    else:
+                        self._callbacks[timer_id]()
+                except Exception:
+                    traceback.print_exc()
                 await asyncio.sleep(self._intervals[timer_id])
                 asyncio.create_task(handle())
 
